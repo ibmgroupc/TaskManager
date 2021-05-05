@@ -1,5 +1,6 @@
 package com.ibm.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -40,9 +41,29 @@ public class TaskService {
 		return taskRepository.findByNameIgnoreCase(taskName);
 	}
 
-	public List<Task> getTaskByPriority(String priority) {
-		return taskRepository.findByPriority(priority);
 
+	public List<Task> getTaskByPriority(int priority) {
+
+		return taskRepository.findByPriority(priority);
 	}
+
+	public List<Task> getTaskByStartDate(Date startDate) {
+		
+		return taskRepository.findByStartDate(startDate);
+	}
+
+	public List<Task> getTaskByParent(String taskParent) {
+
+		return taskRepository.findByParent(taskParent);
+	}
+
+	public List<Task> getTaskByEndDate(Date endDate) {
+		
+		return taskRepository.findByEndDate(endDate);
+	}
+
+
+	
+
 	
 }

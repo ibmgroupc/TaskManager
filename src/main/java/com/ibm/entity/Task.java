@@ -29,15 +29,11 @@ public class Task {
 	public Date getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
+
 	public Date getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+	
 	public int getPriority() {
 		return priority;
 	}
@@ -70,4 +66,18 @@ public class Task {
 	}
 	private TYPE type;
 	private OCCURANCE occurance;
+	
+	public void setEndDate(Date endDate) {
+		if (endDate.compareTo(new Date()) < 0) {
+			throw new IllegalArgumentException("End Date cannot be past day");
+		}
+		this.endDate = endDate;
+		
+	}
+	public void setStartDate(Date startDate) {
+		if (startDate.compareTo(new Date()) < 0) {
+			throw new IllegalArgumentException("Start Date cannot be future day");
+		}
+		this.startDate = startDate;
+	}
 }

@@ -1,5 +1,6 @@
 package com.ibm.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +39,7 @@ public class TaskController {
 	@PostMapping("/task")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	String createTask(@RequestBody @Valid Task task , BindingResult bindingResult) {
-		validateTask(bindingResult);
+	//	validateTask(bindingResult);
 		
 		return taskService.createTask(task);
 	}
@@ -49,7 +50,7 @@ public class TaskController {
 //			throw new IllegalArgumentException("Something went Wrong , Please try again");
 //		}
 //	}
-//	
+	
 	/*
 	 * method to create get tasks
 	 * 
@@ -61,15 +62,32 @@ public class TaskController {
 		return taskService.getTasks();
 	}
 	
-	@GetMapping("/task/{name}")
+	@GetMapping("/task/name/{name}")
 	List<Task> getTask(@PathVariable("name") String taskName) {
 		return taskService.getTask(taskName);
 	}
 	
-	@GetMapping("/bug/{priority}")
-	List<Task> getTaskByPriority(@PathVariable("priority") String priority) {
+	@GetMapping("/task/priority/{priority}")
+	List<Task> getTaskByPriority(@PathVariable("priority") int priority) {
 		return taskService.getTaskByPriority(priority);
 	}
+	
+	@GetMapping("/task/startDate/{startDate}")
+	List<Task> getTaskBystartDate(@PathVariable("startDate") Date startDate){
+		return taskService.getTaskByStartDate(startDate);
+	}
+	
+	@GetMapping("/task/endDate/{endDate}")
+	List<Task> getTaskByendDate(@PathVariable("endDate") Date endDate){
+		return taskService.getTaskByEndDate(endDate);
+	}
+	
+	@GetMapping("/task/parent/{parent}")
+	List<Task> getTaskByParent(@PathVariable("parent") String taskParent) {
+		return taskService.getTaskByParent(taskParent);
+	}
+	
+	
 	/*
 	 * method to Update task
 	 * @param taskId

@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ibm.service.StatusIllegalArgumentException;
 import com.ibm.entity.Task;
@@ -28,8 +29,14 @@ public class TaskService {
 		return null;
 	}
 
-	public void updateTask(@Valid Task task) {
+	public void updateTask(@Valid @RequestBody Task task) {
 		// TODO Auto-generated method stub
+		taskRepository.save(task);
+	}
+
+	public void deleteTask(String taskId) {
+		// TODO Auto-generated method stub
+		taskRepository.deleteById(taskId);
 		
 	}
 

@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +33,7 @@ public class TaskController {
 	String createTask(@RequestBody @Valid Task task , BindingResult bindingResult) {
 		validateTask(bindingResult);
 		
-		return TaskService.createTask(task);
+		return taskService.createTask(task);
 	}
 
 	private void validateTask(BindingResult bindingResult) {
@@ -52,6 +53,12 @@ public class TaskController {
 		logger.log(Level.INFO, taskId);
 		task.setId(taskId);
 		taskService.updateTask(task);
+	}
+	
+	@DeleteMapping("/task/{id}")
+	void deleteTask(@PathVariable("id") String taskId) {
+		System.out.println(taskId);
+		taskService.deleteTask(taskId);
 	}
 	
 

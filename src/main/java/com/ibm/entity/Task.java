@@ -4,8 +4,10 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.data.annotation.Id;
+
 public class Task {
-	@NotNull
+	@Id
 	private String id;
 	@NotNull
 	private String name;

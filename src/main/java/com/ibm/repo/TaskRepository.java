@@ -1,5 +1,9 @@
 package com.ibm.repo;
 
-public class TaskRepository {
+import org.springframework.data.mongodb.repository.MongoRepository;
 
+import com.ibm.entity.Task;
+
+public interface TaskRepository extends MongoRepository<Task , String> {
+	
 }

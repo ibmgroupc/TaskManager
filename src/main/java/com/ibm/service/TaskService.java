@@ -27,9 +27,11 @@ public class TaskService {
 	}
 
 	public void updateTask(@Valid Task task) {
-		// TODO Auto-generated method stub
-		
-		
+		taskRepository.save(task);
+	}
+
+	public void deleteTask(String taskId) {
+		taskRepository.deleteById(taskId);		
 	}
 
 	

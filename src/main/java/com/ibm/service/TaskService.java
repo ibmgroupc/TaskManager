@@ -28,7 +28,6 @@ public class TaskService {
 	}
 
 	public void updateTask(@Valid Task task) {
-		// TODO Auto-generated method stub
 		taskRepository.save(task);
 		
 	}
@@ -42,8 +41,9 @@ public class TaskService {
 		return taskRepository.findByNameIgnoreCase(taskName);
 	}
 
+
 	public List<Task> getTaskByPriority(int priority) {
-		
+
 		return taskRepository.findByPriority(priority);
 	}
 
@@ -61,6 +61,9 @@ public class TaskService {
 		
 		return taskRepository.findByEndDate(endDate);
 	}
+
+
+	
 
 	
 }

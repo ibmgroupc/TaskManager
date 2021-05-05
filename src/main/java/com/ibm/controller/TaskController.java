@@ -44,6 +44,7 @@ public class TaskController {
 		return taskService.createTask(task);
 	}
 
+
 //	private void validateTask(BindingResult bindingResult) {
 //		if(bindingResult.hasErrors()) {
 //			throw new IllegalArgumentException("Something went Wrong , Please try again");
@@ -55,7 +56,8 @@ public class TaskController {
 	 * 
 	 * */
 	
-	@GetMapping("/task/")
+	@GetMapping("/task")
+
 	List<Task> getTasks(){
 		return taskService.getTasks();
 	}
@@ -99,6 +101,7 @@ public class TaskController {
 		taskService.updateTask(task);
 	}
 	
+
 	/*
 	 * method to Delete task
 	 * @param taskId

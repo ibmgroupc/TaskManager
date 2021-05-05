@@ -28,28 +28,28 @@ public class TaskController {
 	
 	Logger logger = Logger.getLogger(TaskController.class.getName());
 	
-	@PostMapping("/test")
+	@PostMapping("/task")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	String createTask(@RequestBody @Valid Task task , BindingResult bindingResult) {
-		validateTask(bindingResult);
+	//	validateTask(bindingResult);
 		
 		return taskService.createTask(task);
 	}
 
-	private void validateTask(BindingResult bindingResult) {
-		if(bindingResult.hasErrors()) {
-			throw new IllegalArgumentException("Something went Wrong , Please try again");
-		}
-	}
-	
+//	private void validateTask(BindingResult bindingResult) {
+//		if(bindingResult.hasErrors()) {
+//			throw new IllegalArgumentException("Something went Wrong , Please try again");
+//		}
+//	}
+//	
 	@GetMapping("/task/")
 	List<Task> getTasks(){
 		return taskService.getTasks();
 	}
 	
-	@PutMapping("/bug/{id}")
+	@PutMapping("/task/{id}")
 	void updateTask(@RequestBody @Valid Task task, BindingResult bindingResult, @PathVariable("id") String taskId) {
-		validateTask(bindingResult);
+	//	validateTask(bindingResult);
 		logger.log(Level.INFO, taskId);
 		task.setId(taskId);
 		taskService.updateTask(task);

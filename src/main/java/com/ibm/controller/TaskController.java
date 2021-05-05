@@ -1,5 +1,6 @@
 package com.ibm.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,13 @@ public class TaskController {
 	TaskService taskService;
 	
 	Logger logger = Logger.getLogger(TaskController.class.getName());
+
+	/*
+	 * method to create Task
+	 * @param task
+	 * @param taskId
+	 * @param bindingResult
+	 **/
 	
 	@PostMapping("/task")
 	@ResponseStatus(code = HttpStatus.CREATED)
@@ -36,17 +44,55 @@ public class TaskController {
 		return taskService.createTask(task);
 	}
 
+
 //	private void validateTask(BindingResult bindingResult) {
 //		if(bindingResult.hasErrors()) {
 //			throw new IllegalArgumentException("Something went Wrong , Please try again");
 //		}
 //	}
-//	
-	@GetMapping("/task/")
+	
+	/*
+	 * method to create get tasks
+	 * 
+	 * */
+	
+	@GetMapping("/task")
+
 	List<Task> getTasks(){
 		return taskService.getTasks();
 	}
 	
+	@GetMapping("/task/name/{name}")
+	List<Task> getTask(@PathVariable("name") String taskName) {
+		return taskService.getTask(taskName);
+	}
+	
+	@GetMapping("/task/priority/{priority}")
+	List<Task> getTaskByPriority(@PathVariable("priority") int priority) {
+		return taskService.getTaskByPriority(priority);
+	}
+	
+	@GetMapping("/task/startDate/{startDate}")
+	List<Task> getTaskBystartDate(@PathVariable("startDate") Date startDate){
+		return taskService.getTaskByStartDate(startDate);
+	}
+	
+	@GetMapping("/task/endDate/{endDate}")
+	List<Task> getTaskByendDate(@PathVariable("endDate") Date endDate){
+		return taskService.getTaskByEndDate(endDate);
+	}
+	
+	@GetMapping("/task/parent/{parent}")
+	List<Task> getTaskByParent(@PathVariable("parent") String taskParent) {
+		return taskService.getTaskByParent(taskParent);
+	}
+	
+	
+	/*
+	 * method to Update task
+	 * @param taskId
+	 * @param task
+	 * */
 	@PutMapping("/task/{id}")
 	void updateTask(@RequestBody @Valid Task task, BindingResult bindingResult, @PathVariable("id") String taskId) {
 	//	validateTask(bindingResult);
@@ -55,11 +101,14 @@ public class TaskController {
 		taskService.updateTask(task);
 	}
 	
-	@DeleteMapping("/task/{id}")
-	void deleteTask(@PathVariable("id") String taskId) {
-		System.out.println(taskId);
-		taskService.deleteTask(taskId);
-	}
-	
 
+	/*
+	 * method to Delete task
+	 * @param taskId
+	 * */
+	@DeleteMapping("/task/{id}")
+		void deleteTask(@PathVariable("id") String taskId) {
+			taskService.deleteTask(taskId);
+		}
+	
 }

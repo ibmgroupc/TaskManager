@@ -1,5 +1,6 @@
 package com.ibm.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -23,21 +24,47 @@ public class TaskService {
 	}
 
 	public List<Task> getTasks() {
-		// TODO Auto-generated method stub
+		
 		return taskRepository.findAll();
 	}
 
-	public void updateTask(@Valid @RequestBody Task task) {
-		// TODO Auto-generated method stub
+	public void updateTask(@Valid Task task) {
 		taskRepository.save(task);
+		
 	}
 
 	public void deleteTask(String taskId) {
-		// TODO Auto-generated method stub
 		taskRepository.deleteById(taskId);
-		
-		
 	}
+
+	public List<Task> getTask(String taskName) {
+		
+		return taskRepository.findByNameIgnoreCase(taskName);
+	}
+
+
+	public List<Task> getTaskByPriority(int priority) {
+
+		return taskRepository.findByPriority(priority);
+	}
+
+	public List<Task> getTaskByStartDate(Date startDate) {
+		
+		return taskRepository.findByStartDate(startDate);
+	}
+
+	public List<Task> getTaskByParent(String taskParent) {
+
+		return taskRepository.findByParent(taskParent);
+	}
+
+	public List<Task> getTaskByEndDate(Date endDate) {
+		
+		return taskRepository.findByEndDate(endDate);
+	}
+
+
+	
 
 	
 }

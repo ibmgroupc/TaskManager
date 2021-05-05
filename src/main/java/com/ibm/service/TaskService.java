@@ -27,7 +27,6 @@ public class TaskService {
 	}
 
 	public void updateTask(@Valid Task task) {
-		// TODO Auto-generated method stub
 		taskRepository.save(task);
 		
 	}
@@ -42,9 +41,8 @@ public class TaskService {
 	}
 
 	public List<Task> getTaskByPriority(String priority) {
-		// TODO Auto-generated method stub
 		return taskRepository.findByPriority(priority);
-	}
 
+	}
 	
 }

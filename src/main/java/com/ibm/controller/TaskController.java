@@ -38,10 +38,11 @@ public class TaskController {
 	@PostMapping("/task")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	String createTask(@RequestBody @Valid Task task , BindingResult bindingResult) {
-	//	validateTask(bindingResult);
+		validateTask(bindingResult);
 		
 		return taskService.createTask(task);
 	}
+
 
 //	private void validateTask(BindingResult bindingResult) {
 //		if(bindingResult.hasErrors()) {
@@ -54,7 +55,8 @@ public class TaskController {
 	 * 
 	 * */
 	
-	@GetMapping("/task/")
+	@GetMapping("/task")
+
 	List<Task> getTasks(){
 		return taskService.getTasks();
 	}
@@ -81,6 +83,7 @@ public class TaskController {
 		taskService.updateTask(task);
 	}
 	
+
 	/*
 	 * method to Delete task
 	 * @param taskId

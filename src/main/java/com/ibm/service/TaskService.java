@@ -22,14 +22,28 @@ public class TaskService {
 	}
 
 	public List<Task> getTasks() {
-		// TODO Auto-generated method stub
+		
 		return taskRepository.findAll();
 	}
 
 	public void updateTask(@Valid Task task) {
 		// TODO Auto-generated method stub
+		taskRepository.save(task);
 		
+	}
+
+	public void deleteTask(String taskId) {
+		taskRepository.deleteById(taskId);
+	}
+
+	public List<Task> getTask(String taskName) {
 		
+		return taskRepository.findByNameIgnoreCase(taskName);
+	}
+
+	public List<Task> getTaskByPriority(String priority) {
+		// TODO Auto-generated method stub
+		return taskRepository.findByPriority(priority);
 	}
 
 	

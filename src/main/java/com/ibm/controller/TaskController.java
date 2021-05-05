@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,13 @@ public class TaskController {
 	TaskService taskService;
 	
 	Logger logger = Logger.getLogger(TaskController.class.getName());
+
+	/*
+	 * method to create Task
+	 * @param task
+	 * @param taskId
+	 * @param bindingResult
+	 **/
 	
 	@PostMapping("/task")
 	@ResponseStatus(code = HttpStatus.CREATED)
@@ -41,11 +49,30 @@ public class TaskController {
 //		}
 //	}
 //	
+	/*
+	 * method to create get tasks
+	 * 
+	 * */
+	
 	@GetMapping("/task/")
 	List<Task> getTasks(){
 		return taskService.getTasks();
 	}
 	
+	@GetMapping("/task/{name}")
+	List<Task> getTask(@PathVariable("name") String taskName) {
+		return taskService.getTask(taskName);
+	}
+	
+	@GetMapping("/bug/{priority}")
+	List<Task> getTaskByPriority(@PathVariable("priority") String priority) {
+		return taskService.getTaskByPriority(priority);
+	}
+	/*
+	 * method to Update task
+	 * @param taskId
+	 * @param task
+	 * */
 	@PutMapping("/task/{id}")
 	void updateTask(@RequestBody @Valid Task task, BindingResult bindingResult, @PathVariable("id") String taskId) {
 	//	validateTask(bindingResult);
@@ -54,5 +81,13 @@ public class TaskController {
 		taskService.updateTask(task);
 	}
 	
-
+	/*
+	 * method to Delete task
+	 * @param taskId
+	 * */
+	@DeleteMapping("/task/{id}")
+		void deleteTask(@PathVariable("id") String taskId) {
+			taskService.deleteTask(taskId);
+		}
+	
 }

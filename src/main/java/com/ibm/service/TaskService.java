@@ -1,5 +1,6 @@
 package com.ibm.service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +18,7 @@ import com.ibm.repo.TaskRepository;
 public class TaskService {
 	@Autowired
 	TaskRepository taskRepository;
-	
+
 	public String createTask(Task task) {
 		taskRepository.save(task);
 		return task.getId();
@@ -25,7 +26,6 @@ public class TaskService {
 	}
 
 	public List<Task> getTasks() {
-		
 		return taskRepository.findAll();
 	}
 
@@ -51,7 +51,6 @@ public class TaskService {
 			}
 		});
 		taskRepository.save(task);
-		
 	}
 
 	public void deleteTask(String taskId) {
@@ -59,33 +58,24 @@ public class TaskService {
 	}
 
 	public List<Task> getTask(String taskName) {
-		
 		return taskRepository.findByNameIgnoreCase(taskName);
 	}
 
-
 	public List<Task> getTaskByPriority(int priority) {
-
 		return taskRepository.findByPriority(priority);
 	}
 
 	public List<Task> getTaskByStartDate(Date startDate) {
-		
 		return taskRepository.findByStartDate(startDate);
 	}
 
 	public List<Task> getTaskByParent(String taskParent) {
-
 		return taskRepository.findByParent(taskParent);
 	}
 
 	public List<Task> getTaskByEndDate(Date endDate) {
-		
 		return taskRepository.findByEndDate(endDate);
 	}
 
 
-	
-
-	
 }

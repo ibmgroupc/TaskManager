@@ -2,12 +2,14 @@ package com.ibm.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ibm.entity.STATUS;
 import com.ibm.entity.Task;
 import com.ibm.repo.TaskRepository;
 
@@ -28,6 +30,26 @@ public class TaskService {
 	}
 
 	public void updateTask(@Valid Task task) {
+		STATUS status =task.getStatus();
+		Optional<Task> oldTask = taskRepository.findById(task.getId());
+		oldTask.ifPresent(oldtask ->{
+			STATUS oldstatus = oldtask.getStatus();
+			if(oldstatus == STATUS.TODO) {
+				if(!(status == STATUS.DOING || status == STATUS.TODO)) {
+					throw new IllegalArgumentException("STATUS CAN ONLY BE TODO");
+				}
+			}
+			if(oldstatus == STATUS.DOING) {
+				if(!(status == STATUS.DONE || status==STATUS.DOING)){
+					throw new IllegalArgumentException("STATUS CAN ONLY BE DOING");
+				}
+			}
+			if(oldstatus == STATUS.DONE) {
+				if(!(status == STATUS.DONE)) {
+					throw new IllegalArgumentException("STATUS NOT SUITABLE");
+				}
+			}
+		});
 		taskRepository.save(task);
 		
 	}

@@ -15,17 +15,16 @@ public class Task {
 	private String name;
 	@NotNull
 	@NotBlank
+	private String username;
+	@NotNull
 	private Date startDate;
 	@NotNull
-	@NotBlank
 	private Date endDate;
 	@NotNull
-	@NotBlank
 	private int priority;
 	@NotNull
 	private String parent;
 	@NotNull
-	@NotBlank
 	private STATUS status;
 	public String getId() {
 		return id;
@@ -79,6 +78,12 @@ public class Task {
 	}
 	private TYPE type;
 	private OCCURANCE occurance;
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	
 	public void setEndDate(Date endDate) {
 		if (endDate.compareTo(new Date()) < 0) {

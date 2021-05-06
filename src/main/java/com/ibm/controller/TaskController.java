@@ -59,7 +59,6 @@ public class TaskController {
 	 * */
 	
 	@GetMapping("/task")
-
 	List<Task> getTasks(){
 		return taskService.getTasks();
 	}

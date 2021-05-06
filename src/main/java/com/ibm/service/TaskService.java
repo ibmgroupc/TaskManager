@@ -30,27 +30,26 @@ public class TaskService {
 	}
 
 	public void updateTask(@Valid Task task) {
-		STATUS status=task.getStatus();
-		Optional <Task> oldTask=taskRepository.findById(task.getId());
-		oldTask.ifPresent(oldtask->{
-			STATUS oldstatus=oldtask.getStatus();
-			if(oldstatus==STATUS.TODO) {
-				if(!(status==STATUS.DOING)) {
-					throw new IllegalArgumentException("Status should be DOING");
+		STATUS status =task.getStatus();
+		Optional<Task> oldTask = taskRepository.findById(task.getId());
+		oldTask.ifPresent(oldtask ->{
+			STATUS oldstatus = oldtask.getStatus();
+			if(oldstatus == STATUS.TODO) {
+				if(!(status == STATUS.DOING || status == STATUS.TODO)) {
+					throw new IllegalArgumentException("STATUS CAN ONLY BE TODO");
 				}
 			}
-			if(oldstatus==STATUS.DOING) {
-				if(!(status==STATUS.DONE)) {
-					throw new IllegalArgumentException("Status should be DONE");
+			if(oldstatus == STATUS.DOING) {
+				if(!(status == STATUS.DONE || status==STATUS.DOING)){
+					throw new IllegalArgumentException("STATUS CAN ONLY BE DOING");
 				}
 			}
-			if(oldstatus==STATUS.DONE) {
-				if((status==STATUS.DOING || status==STATUS.TODO || status==STATUS.DONE)) {
-					throw new IllegalArgumentException("As the task has been done it can only be deleted");
+			if(oldstatus == STATUS.DONE) {
+				if(!(status == STATUS.DONE)) {
+					throw new IllegalArgumentException("STATUS NOT SUITABLE");
 				}
 			}
-			
-			});
+		});
 		taskRepository.save(task);
 	}
 

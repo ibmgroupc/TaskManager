@@ -2,17 +2,28 @@ package com.ibm.entity;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class Task {
 	@NotNull
 	private String id;
 	@NotNull
+	@NotBlank
 	private String name;
+	@NotNull
+	@NotBlank
 	private Date startDate;
+	@NotNull
+	@NotBlank
 	private Date endDate;
+	@NotNull
+	@NotBlank
 	private int priority;
+	@NotNull
 	private String parent;
+	@NotNull
+	@NotBlank
 	private STATUS status;
 	public String getId() {
 		return id;

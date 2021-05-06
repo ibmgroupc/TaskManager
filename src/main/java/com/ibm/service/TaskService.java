@@ -1,13 +1,16 @@
 package com.ibm.service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ibm.entity.STATUS;
 import com.ibm.entity.Task;
 import com.ibm.repo.TaskRepository;
 
@@ -15,7 +18,7 @@ import com.ibm.repo.TaskRepository;
 public class TaskService {
 	@Autowired
 	TaskRepository taskRepository;
-	
+
 	public String createTask(Task task) {
 		taskRepository.save(task);
 		return task.getId();
@@ -23,13 +26,32 @@ public class TaskService {
 	}
 
 	public List<Task> getTasks() {
-		
 		return taskRepository.findAll();
 	}
 
 	public void updateTask(@Valid Task task) {
+		STATUS status=task.getStatus();
+		Optional <Task> oldTask=taskRepository.findById(task.getId());
+		oldTask.ifPresent(oldtask->{
+			STATUS oldstatus=oldtask.getStatus();
+			if(oldstatus==STATUS.TODO) {
+				if(!(status==STATUS.DOING)) {
+					throw new IllegalArgumentException("Status should be DOING");
+				}
+			}
+			if(oldstatus==STATUS.DOING) {
+				if(!(status==STATUS.DONE)) {
+					throw new IllegalArgumentException("Status should be DONE");
+				}
+			}
+			if(oldstatus==STATUS.DONE) {
+				if((status==STATUS.DOING || status==STATUS.TODO || status==STATUS.DONE)) {
+					throw new IllegalArgumentException("As the task has been done it can only be deleted");
+				}
+			}
+			
+			});
 		taskRepository.save(task);
-		
 	}
 
 	public void deleteTask(String taskId) {
@@ -37,33 +59,24 @@ public class TaskService {
 	}
 
 	public List<Task> getTask(String taskName) {
-		
 		return taskRepository.findByNameIgnoreCase(taskName);
 	}
 
-
 	public List<Task> getTaskByPriority(int priority) {
-
 		return taskRepository.findByPriority(priority);
 	}
 
 	public List<Task> getTaskByStartDate(Date startDate) {
-		
 		return taskRepository.findByStartDate(startDate);
 	}
 
 	public List<Task> getTaskByParent(String taskParent) {
-
 		return taskRepository.findByParent(taskParent);
 	}
 
 	public List<Task> getTaskByEndDate(Date endDate) {
-		
 		return taskRepository.findByEndDate(endDate);
 	}
 
 
-	
-
-	
 }

@@ -4,8 +4,10 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+
 public class Task {
-	@NotNull
 	private String id;
 	@NotNull
 	private String name;
@@ -69,14 +71,14 @@ public class Task {
 	
 	public void setEndDate(Date endDate) {
 		if (endDate.compareTo(new Date()) < 0) {
-			throw new IllegalArgumentException("End Date cannot be past day");
+			throw new IllegalArgumentException("End Date should be future day");
 		}
 		this.endDate = endDate;
 		
 	}
 	public void setStartDate(Date startDate) {
 		if (startDate.compareTo(new Date()) < 0) {
-			throw new IllegalArgumentException("Start Date cannot be future day");
+			throw new IllegalArgumentException("Start Date should be future day");
 		}
 		this.startDate = startDate;
 	}

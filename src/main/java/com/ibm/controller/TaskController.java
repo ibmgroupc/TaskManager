@@ -1,5 +1,6 @@
 package com.ibm.controller;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -8,6 +9,7 @@ import java.util.logging.Logger;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,17 +42,16 @@ public class TaskController {
 	@PostMapping("/task")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	String createTask(@RequestBody @Valid Task task , BindingResult bindingResult) {
-	//	validateTask(bindingResult);
-		
+		validateTask(bindingResult);
 		return taskService.createTask(task);
 	}
 
 
-//	private void validateTask(BindingResult bindingResult) {
-//		if(bindingResult.hasErrors()) {
-//			throw new IllegalArgumentException("Something went Wrong , Please try again");
-//		}
-//	}
+	private void validateTask(BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			throw new IllegalArgumentException("Something went Wrong , Please try again");
+		}
+	}
 	
 	/*
 	 * method to create get tasks
@@ -74,6 +76,8 @@ public class TaskController {
 	
 	@GetMapping("/task/startDate/{startDate}")
 	List<Task> getTaskBystartDate(@PathVariable("startDate") Date startDate){
+		System.out.println(startDate);
+		//startDate.set
 		return taskService.getTaskByStartDate(startDate);
 	}
 	

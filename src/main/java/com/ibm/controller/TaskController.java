@@ -39,17 +39,16 @@ public class TaskController {
 	@PostMapping("/task")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	String createTask(@RequestBody @Valid Task task , BindingResult bindingResult) {
-	//	validateTask(bindingResult);
-		
+		validateTask(bindingResult);
 		return taskService.createTask(task);
 	}
 
 
-//	private void validateTask(BindingResult bindingResult) {
-//		if(bindingResult.hasErrors()) {
-//			throw new IllegalArgumentException("Something went Wrong , Please try again");
-//		}
-//	}
+	private void validateTask(BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			throw new IllegalArgumentException("Something went Wrong , Please try again");
+		}
+	}
 	
 	/*
 	 * method to create get tasks
@@ -57,7 +56,6 @@ public class TaskController {
 	 * */
 	
 	@GetMapping("/task")
-
 	List<Task> getTasks(){
 		return taskService.getTasks();
 	}
@@ -74,6 +72,8 @@ public class TaskController {
 	
 	@GetMapping("/task/startDate/{startDate}")
 	List<Task> getTaskBystartDate(@PathVariable("startDate") Date startDate){
+		System.out.println(startDate);
+		//startDate.set
 		return taskService.getTaskByStartDate(startDate);
 	}
 	

@@ -108,26 +108,6 @@ public class TaskController {
 	List<Task> getTaskByParent(@PathVariable("parent") String taskParent) {
 		return taskService.getTaskByParent(taskParent);
 	}
-
-	/*
-	 * method to fetch task by partial Name
-	 * @param taskName
-	 * */
-	@CrossOrigin
-	@GetMapping("/task/partialname/{name}")
-	List<Task> getTaskByPartialName(@PathVariable("name") String taskName){
-		return taskService.getTaskByPartialName(taskName);
-	}
-	/*
-	 * method to fetch task by partial parent
-	 * @param taskParent
-	 * */
-	@CrossOrigin
-	@GetMapping("/task/partialparent/{parent}")
-	List<Task> getTaskByPartialParent(@PathVariable("parent") String taskParent) {
-		return taskService.getTaskByPartialParent(taskParent);
-	}
-
 	
 	/*
 	 * method to Update task

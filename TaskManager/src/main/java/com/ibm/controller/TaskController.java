@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -84,7 +85,7 @@ public class TaskController {
 	 */
 	@CrossOrigin
 	@GetMapping("/task/startDate/{startDate}")
-	List<Task> getTaskBystartDate(@PathVariable("startDate") Date startDate){
+	List<Task> getTaskBystartDate(@PathVariable("startDate") @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) Date startDate){
 		System.out.println(startDate);
 		//startDate.set
 		return taskService.getTaskByStartDate(startDate);
@@ -95,7 +96,7 @@ public class TaskController {
 	 * */
 	@CrossOrigin
 	@GetMapping("/task/endDate/{endDate}")
-	List<Task> getTaskByendDate(@PathVariable("endDate") Date endDate){
+	List<Task> getTaskByendDate(@PathVariable("endDate") @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) Date endDate){
 		return taskService.getTaskByEndDate(endDate);
 	}
 	/*

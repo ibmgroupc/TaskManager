@@ -20,19 +20,16 @@ public class CreateUserService {
 		createUserRepository.save(createUser);
 		return createUser.getId();
 	}
-
+	
 	public void updateUser(@Valid @RequestBody CreateUser createUser) {
-		// TODO Auto-generated method stub
 		createUserRepository.save(createUser);		
 	}
 
 	public List<CreateUser> getUser(String username) {
-		// TODO Auto-generated method stub
 	    return createUserRepository.findByUsernameIgnoreCase(username);	
 	}
 
 	public List<CreateUser> getUserByNameAndPassword(String userName, String userPassword) {
-		// TODO Auto-generated method stub
 		return createUserRepository.findByUsernameAndPassword(userName,userPassword);
 	}
 

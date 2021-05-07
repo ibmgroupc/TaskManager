@@ -71,7 +71,7 @@ public class TaskService {
 	}
 
 	public List<Task> getTaskByParent(String taskParent) {
-		return taskRepository.findByParentIgnoreCase(taskParent);
+		return taskRepository.findByParentIsContainingIgnoreCase(taskParent);
 	}
 
 	public List<Task> getTaskByEndDate(Date endDate) {

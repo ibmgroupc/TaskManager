@@ -11,7 +11,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 
@@ -29,12 +28,12 @@ public class CreateUser {
 	
 	@NotNull
 	@NotBlank
-	@Size(min=3, max=12, message = "User name must be between 3 - 12 characters !!")
+	@Size(min=5, max=20)
 	private String username;
 	
 	@NotNull
 	@NotBlank
-	@Length(min=5, message="Password must be at least 5 characters")
+	@Size(min=8, max=30)
 	private String password;
 	
 	@NotNull

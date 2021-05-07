@@ -71,11 +71,20 @@ public class TaskService {
 	}
 
 	public List<Task> getTaskByParent(String taskParent) {
-		return taskRepository.findByParent(taskParent);
+		return taskRepository.findByParentIgnoreCase(taskParent);
 	}
 
 	public List<Task> getTaskByEndDate(Date endDate) {
 		return taskRepository.findByEndDate(endDate);
+	}
+	
+	public List<Task> getTaskByPartialName(String taskName){
+		return taskRepository.findByNameIgnoreCase(taskName);
+	}
+
+	public List<Task> getTaskByPartialParent(String taskParent) {
+		// TODO Auto-generated method stub
+		return taskRepository.findByParentIgnoreCase(taskParent);
 	}
 
 

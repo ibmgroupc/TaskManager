@@ -11,10 +11,12 @@ import com.ibm.entity.Task;
 public interface TaskRepository extends MongoRepository<Task , String> {
 
 	List<Task> findByNameIgnoreCase(String taskName);
+	
+	List<Task> findByNameIsContainingIgnoreCase(String taskName);
 
 	List<Task> findByPriority(int priority);
 
-	List<Task> findByParentIgnoreCase(String taskParent);
+	List<Task> findByParentIsContainingIgnoreCase(String taskParent);
 
 	List<Task> findByStartDate(Date startDate);
 

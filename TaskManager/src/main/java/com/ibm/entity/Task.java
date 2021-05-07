@@ -7,6 +7,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.ibm.service.StatusIllegalArgumentException;
+
 
 public class Task {
 	private String id;
@@ -87,14 +89,14 @@ public class Task {
 	
 	public void setEndDate(Date endDate) {
 		if (endDate.compareTo(new Date()) < 0) {
-			throw new IllegalArgumentException("End Date should be future day");
+			throw new StatusIllegalArgumentException("End Date should be future day");
 		}
 		this.endDate = endDate;
 		
 	}
 	public void setStartDate(Date startDate) {
 		if (startDate.compareTo(new Date()) < 0) {
-			throw new IllegalArgumentException("Start Date should be future day");
+			throw new StatusIllegalArgumentException("Start Date should be future day");
 		}
 		this.startDate = startDate;
 	}

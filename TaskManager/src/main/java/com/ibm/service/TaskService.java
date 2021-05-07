@@ -59,7 +59,7 @@ public class TaskService {
 	}
 
 	public List<Task> getTask(String taskName) {
-		return taskRepository.findByNameIgnoreCase(taskName);
+		return taskRepository.findByNameIsContainingIgnoreCase(taskName);
 	}
 
 	public List<Task> getTaskByPriority(int priority) {
@@ -77,15 +77,7 @@ public class TaskService {
 	public List<Task> getTaskByEndDate(Date endDate) {
 		return taskRepository.findByEndDate(endDate);
 	}
-	
-	public List<Task> getTaskByPartialName(String taskName){
-		return taskRepository.findByNameIsContainingIgnoreCase(taskName);
-	}
 
-	public List<Task> getTaskByPartialParent(String taskParent) {
-		// TODO Auto-generated method stub
-		return taskRepository.findByParentIsContainingIgnoreCase(taskParent);
-	}
 
 
 }

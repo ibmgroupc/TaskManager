@@ -5,8 +5,6 @@ import java.util.Date;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.ibm.service.StatusIllegalArgumentException;
 
 
@@ -89,7 +87,7 @@ public class Task {
 	
 	public void setEndDate(Date endDate) {
 		if (endDate.compareTo(getStartDate()) < 0) {
-			throw new StatusIllegalArgumentException("End Date should be greater than future day");
+			throw new StatusIllegalArgumentException("End Date should be future day or same as start date");
 		}
 		this.endDate = endDate;
 		

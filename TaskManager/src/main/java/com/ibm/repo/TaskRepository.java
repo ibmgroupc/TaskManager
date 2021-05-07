@@ -14,10 +14,11 @@ public interface TaskRepository extends MongoRepository<Task , String> {
 
 	List<Task> findByPriority(int priority);
 
-	List<Task> findByParent(String taskParent);
+	List<Task> findByParentIgnoreCase(String taskParent);
 
 	List<Task> findByStartDate(Date startDate);
 
 	List<Task> findByEndDate(Date endDate);
+
 
 }

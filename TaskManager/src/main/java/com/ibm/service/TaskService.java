@@ -78,6 +78,14 @@ public class TaskService {
 		return taskRepository.findByEndDate(endDate);
 	}
 
+	public List<Task> getTaskByPartialName(String taskName) {
+		return taskRepository.findByNameIsContainingIgnoreCase(taskName);
+	}
+
+	public List<Task> getTaskByPartialParent(String taskParent) {
+		return taskRepository.findByParentIsContainingIgnoreCase(taskParent);
+	}
+
 
 
 }

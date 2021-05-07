@@ -87,16 +87,6 @@ public class TaskController {
 		return taskService.getTaskByParent(taskParent);
 	}
 	
-	@GetMapping("/task/partialname/{name}")
-	List<Task> getTaskByPartialName(@PathVariable("name") String taskName){
-		return taskService.getTaskByPartialName(taskName);
-	}
-	
-	@GetMapping("/task/partialparent/{parent}")
-	List<Task> getTaskByPartialParent(@PathVariable("parent") String taskParent) {
-		return taskService.getTaskByPartialParent(taskParent);
-	}
-
 	
 	/*
 	 * method to Update task

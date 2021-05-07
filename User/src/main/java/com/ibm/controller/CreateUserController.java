@@ -1,6 +1,7 @@
 package com.ibm.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,6 +53,10 @@ Logger logger = Logger.getLogger(CreateUserController.class.getName());
 	 * @param createUser
 	 * @param createUserId
 	 */
+	@GetMapping("/user")
+	List<CreateUser> getUser() {
+		return createUserService.getUser();
+	}
 	
 	@GetMapping("/user/{username}")
 	List<CreateUser> getUser(@PathVariable("username") String username) {

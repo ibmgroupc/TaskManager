@@ -20,5 +20,8 @@ public interface TaskRepository extends MongoRepository<Task , String> {
 
 	List<Task> findByEndDate(Date endDate);
 
+	List<Task> findByNameIsContainingIgnoreCase(String taskName);
+
+	List<Task> findByParentIsContainingIgnoreCase(String taskParent);
 
 }

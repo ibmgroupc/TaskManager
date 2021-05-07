@@ -79,12 +79,12 @@ public class TaskService {
 	}
 	
 	public List<Task> getTaskByPartialName(String taskName){
-		return taskRepository.findByNameIgnoreCase(taskName);
+		return taskRepository.findByNameIsContainingIgnoreCase(taskName);
 	}
 
 	public List<Task> getTaskByPartialParent(String taskParent) {
 		// TODO Auto-generated method stub
-		return taskRepository.findByParentIgnoreCase(taskParent);
+		return taskRepository.findByParentIsContainingIgnoreCase(taskParent);
 	}
 
 

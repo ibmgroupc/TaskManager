@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,15 +37,16 @@ public class TaskController {
 	 * @param taskId
 	 * @param bindingResult
 	 **/
-	
+	@CrossOrigin
 	@PostMapping("/task")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	String createTask(@RequestBody @Valid Task task , BindingResult bindingResult) {
 		validateTask(bindingResult);
 		return taskService.createTask(task);
 	}
-
-
+	/*
+	 * For Validate task
+	 * */
 	private void validateTask(BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			throw new IllegalArgumentException("Something went Wrong , Please try again");
@@ -52,51 +54,90 @@ public class TaskController {
 	}
 	
 	/*
-	 * method to create get tasks
-	 * 
+	 * method to fetch get tasks
 	 * */
-	
+	@CrossOrigin
 	@GetMapping("/task")
 	List<Task> getTasks(){
 		return taskService.getTasks();
 	}
-	
+	/*
+	 * method to fetch task by name
+	 * @param taskName
+	 * */
+	@CrossOrigin
 	@GetMapping("/task/name/{name}")
 	List<Task> getTask(@PathVariable("name") String taskName) {
 		return taskService.getTask(taskName);
 	}
-	
+	/*
+	 * method to fetch task by priority
+	 * @param priority
+	 * */
+	@CrossOrigin
 	@GetMapping("/task/priority/{priority}")
 	List<Task> getTaskByPriority(@PathVariable("priority") int priority) {
 		return taskService.getTaskByPriority(priority);
 	}
-	
+	/*
+	 *method to fetch task by StartDate 
+	 *@param startDate
+	 */
+	@CrossOrigin
 	@GetMapping("/task/startDate/{startDate}")
 	List<Task> getTaskBystartDate(@PathVariable("startDate") @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) Date startDate){
 		System.out.println(startDate);
 		//startDate.set
 		return taskService.getTaskByStartDate(startDate);
 	}
-	
+	/*
+	 * method to fetch task by End Date
+	 * @param endDate
+	 * */
+	@CrossOrigin
 	@GetMapping("/task/endDate/{endDate}")
-	List<Task> getTaskByendDate(@PathVariable("endDate")@DateTimeFormat(iso=DateTimeFormat.ISO.DATE) Date endDate){
+	List<Task> getTaskByendDate(@PathVariable("endDate") @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) Date endDate){
 		return taskService.getTaskByEndDate(endDate);
 	}
-	
+	/*
+	 * method to fetch task by Parent
+	 * @param taskParent
+	 * */
+	@CrossOrigin
 	@GetMapping("/task/parent/{parent}")
 	List<Task> getTaskByParent(@PathVariable("parent") String taskParent) {
 		return taskService.getTaskByParent(taskParent);
 	}
-	
+
+	/*
+	 * method to fetch task by partial Name
+	 * @param taskName
+	 * */
+	@CrossOrigin
+	@GetMapping("/task/partialname/{name}")
+	List<Task> getTaskByPartialName(@PathVariable("name") String taskName){
+		return taskService.getTaskByPartialName(taskName);
+	}
+	/*
+	 * method to fetch task by partial parent
+	 * @param taskParent
+	 * */
+	@CrossOrigin
+	@GetMapping("/task/partialparent/{parent}")
+	List<Task> getTaskByPartialParent(@PathVariable("parent") String taskParent) {
+		return taskService.getTaskByPartialParent(taskParent);
+	}
+
 	
 	/*
 	 * method to Update task
 	 * @param taskId
 	 * @param task
 	 * */
+	@CrossOrigin
 	@PutMapping("/task/{id}")
 	void updateTask(@RequestBody @Valid Task task, BindingResult bindingResult, @PathVariable("id") String taskId) {
-	//	validateTask(bindingResult);
+		validateTask(bindingResult);
 		logger.log(Level.INFO, taskId);
 		task.setId(taskId);
 		taskService.updateTask(task);
@@ -107,6 +148,7 @@ public class TaskController {
 	 * method to Delete task
 	 * @param taskId
 	 * */
+	@CrossOrigin
 	@DeleteMapping("/task/{id}")
 		void deleteTask(@PathVariable("id") String taskId) {
 			taskService.deleteTask(taskId);

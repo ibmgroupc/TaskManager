@@ -88,8 +88,8 @@ public class Task {
 	}
 	
 	public void setEndDate(Date endDate) {
-		if (endDate.compareTo(new Date()) < 0) {
-			throw new StatusIllegalArgumentException("End Date should be future day");
+		if (endDate.compareTo(getStartDate()) < 0) {
+			throw new StatusIllegalArgumentException("End Date should be greater than future day");
 		}
 		this.endDate = endDate;
 		

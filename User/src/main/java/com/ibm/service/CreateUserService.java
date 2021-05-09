@@ -18,9 +18,6 @@ public class CreateUserService {
 	CreateUserRepository createUserRepository;
 
 	public String createUser(@Valid CreateUser createUser) {
-		if(!(createUser.getConfirmPassword().compareTo(createUser.getPassword())==0)){
-			throw new IllegalArgumentException("Password does not Match");
-		}
 		String username=createUser.getUsername();
 		List<CreateUser> oldCreateUser=createUserRepository.findAll();
 		List<CreateUser> newCreateUser=createUserRepository.findByUsernameIgnoreCase(username);
@@ -28,6 +25,9 @@ public class CreateUserService {
 		if(newCreateUser.size()>=1)
 		{
 			throw new IllegalArgumentException("Username already exists");
+		}
+		if(!(createUser.getConfirmPassword().compareTo(createUser.getPassword())==0)){
+			throw new IllegalArgumentException("Password does not Match");
 		}
 		createUserRepository.save(createUser);
 		return createUser.getId();

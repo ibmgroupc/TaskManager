@@ -83,13 +83,10 @@ public class CreateUser {
 		this.password = password;
 	}
 	public String getConfirmPassword() {
+        
 		return confirmPassword;
 	}
 	public void setConfirmPassword(String confirmPassword) {
-		if(confirmPassword.compareTo(getPassword())<0) {
-			throw new IllegalArgumentException("Password does not Match");
-		}
-		
-		this.confirmPassword = confirmPassword;
+		this.confirmPassword=confirmPassword;
 	}
 }

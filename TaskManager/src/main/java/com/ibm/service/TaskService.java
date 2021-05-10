@@ -76,4 +76,13 @@ public class TaskService {
 		return taskRepository.findByEndDate(endDate);
 	}
 
+	public void setTaskRepository(TaskRepository dummyRepo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Optional<Task> getTaskById(String taskId) {
+		return taskRepository.findById(taskId);
+	}
+
 }

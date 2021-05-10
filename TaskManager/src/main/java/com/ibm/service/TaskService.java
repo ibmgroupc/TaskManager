@@ -19,8 +19,8 @@ public class TaskService {
 	TaskRepository taskRepository;
 
 	public String createTask(Task task) {
-		taskRepository.save(task);
-		return task.getId();
+		Task savedTask=taskRepository.save(task);
+		return savedTask.getId();
 
 	}
 
@@ -76,9 +76,8 @@ public class TaskService {
 		return taskRepository.findByEndDate(endDate);
 	}
 
-	public void setTaskRepository(TaskRepository dummyRepo) {
-		// TODO Auto-generated method stub
-		
+	public void setTaskRepository(TaskRepository taskRepository) {
+		this.taskRepository= taskRepository;
 	}
 
 	public Optional<Task> getTaskById(String taskId) {

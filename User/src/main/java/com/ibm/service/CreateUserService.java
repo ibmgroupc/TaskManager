@@ -29,8 +29,8 @@ public class CreateUserService {
 		if(!(createUser.getConfirmPassword().compareTo(createUser.getPassword())==0)){
 			throw new IllegalArgumentException("Password does not Match");
 		}
-		createUserRepository.save(createUser);
-		return createUser.getId();
+		CreateUser savedUser=createUserRepository.save(createUser);
+		return savedUser.getId();
 
 	}
 	
@@ -53,11 +53,14 @@ public class CreateUserService {
 	
 	public void setCreateUserRepository(CreateUserRepository createUserRepository) {
 		this.createUserRepository = createUserRepository;
-
 	}
 
 	public CreateUserRepository getCreateUserRepository() {
 		return createUserRepository;
+	}
+
+	public Optional<CreateUser> getUserById(String userId) {
+		return createUserRepository.findById(userId);
 	}
 
 }

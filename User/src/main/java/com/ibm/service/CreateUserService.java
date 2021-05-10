@@ -53,11 +53,14 @@ public class CreateUserService {
 	
 	public void setCreateUserRepository(CreateUserRepository createUserRepository) {
 		this.createUserRepository = createUserRepository;
-
 	}
 
 	public CreateUserRepository getCreateUserRepository() {
 		return createUserRepository;
+	}
+
+	public Optional<CreateUser> getUserById(String userId) {
+		return createUserRepository.findById(userId);
 	}
 
 }

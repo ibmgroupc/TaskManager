@@ -63,6 +63,11 @@ Logger logger = Logger.getLogger(CreateUserController.class.getName());
 		return createUserService.getUser(username);
 	}
 	
+	@GetMapping("/user/{id}")
+	Optional<CreateUser> getUserById(@PathVariable("id") String userId) {
+		return createUserService.getUserById(userId);
+	}
+	
 	@GetMapping("/user/search")
 	List<CreateUser> getUserByNameAndPassword(@RequestParam("username") String userName,@RequestParam("password") String userPassword) {
 		return createUserService.getUserByNameAndPassword(userName,userPassword);

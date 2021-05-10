@@ -2,6 +2,7 @@ package com.ibm.repo;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -20,6 +21,5 @@ public interface TaskRepository extends MongoRepository<Task , String> {
 	List<Task> findByStartDate(Date startDate);
 
 	List<Task> findByEndDate(Date endDate);
-
 
 }

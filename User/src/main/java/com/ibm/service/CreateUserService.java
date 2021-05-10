@@ -21,10 +21,10 @@ public class CreateUserService {
 		String username = createUser.getUsername();
 		List<CreateUser> newCreateUser = createUserRepository.findByUsernameIgnoreCase(username);
 		if (newCreateUser.size() >= 1) {
-			throw new IllegalArgumentException("Username already exists");
+			throw new StatusIllegalArgumentException("Username already exists");
 		}
 		if (!(createUser.getConfirmPassword().compareTo(createUser.getPassword()) == 0)) {
-			throw new IllegalArgumentException("Password does not Match");
+			throw new StatusIllegalArgumentException("Password does not Match");
 		}
 		CreateUser savedUser = createUserRepository.save(createUser);
 		return savedUser.getId();

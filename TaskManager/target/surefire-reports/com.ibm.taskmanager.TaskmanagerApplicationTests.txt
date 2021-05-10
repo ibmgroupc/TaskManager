@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.ibm.taskmanager.TaskmanagerApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 38.131 s - in com.ibm.taskmanager.TaskmanagerApplicationTests

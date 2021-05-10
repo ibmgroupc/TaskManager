@@ -1,5 +1,6 @@
 package com.ibm.entity;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
 
 import java.util.Date;
@@ -8,29 +9,41 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 public class CreateUser {
 	
 	@Id
 	private String id;
-	@NotNull
-	@NotBlank(message="Please enter your name")
+	
+	@NotEmpty(message="Name is Mandatory")
 	private String name;
+	
 	@NotNull
 	@Email(message="Valid Email")
 	private String emailId;
+	
 	@NotNull
 	@NotBlank
+	@Size(min=5, max=20)
 	private String username;
+	
 	@NotNull
 	@NotBlank
+	@Size(min=8, max=30)
 	private String password;
+	
+	@NotNull
+	@NotBlank
 	private String confirmPassword;
+	
 	@NotNull
     @Min(1000000000)
     @Max(9999999999L)
+//	@Pattern(regexp="(^$|[0-9]{10})", message="Mobile number must be 10 digits")
 	private long mobileNumber;
 	
 	public String getId() {
@@ -70,13 +83,10 @@ public class CreateUser {
 		this.password = password;
 	}
 	public String getConfirmPassword() {
+        
 		return confirmPassword;
 	}
 	public void setConfirmPassword(String confirmPassword) {
-		if(confirmPassword.compareTo(getPassword())<0) {
-			throw new IllegalArgumentException("Password does not Match");
-		}
-		
-		this.confirmPassword = confirmPassword;
+		this.confirmPassword=confirmPassword;
 	}
 }

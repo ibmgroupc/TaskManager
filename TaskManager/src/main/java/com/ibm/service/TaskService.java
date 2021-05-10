@@ -1,6 +1,5 @@
 package com.ibm.service;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +8,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ibm.entity.STATUS;
 import com.ibm.entity.Task;
@@ -36,7 +34,7 @@ public class TaskService {
 		oldTask.ifPresent(oldtask ->{
 			STATUS oldstatus = oldtask.getStatus();
 			if(oldstatus == STATUS.TODO) {
-				if(!(status == STATUS.DOING || status == STATUS.TODO)) {
+				if(!(status==STATUS.DONE|| status == STATUS.DOING || status == STATUS.TODO)) {
 					throw new IllegalArgumentException("STATUS CAN ONLY BE TODO");
 				}
 			}
@@ -47,7 +45,7 @@ public class TaskService {
 			}
 			if(oldstatus == STATUS.DONE) {
 				if(!(status == STATUS.DONE)) {
-					throw new IllegalArgumentException("STATUS NOT SUITABLE");
+					throw new IllegalArgumentException("TASK IS COMPLETED CAN ONLY BE DELETED");
 				}
 			}
 		});
@@ -59,7 +57,7 @@ public class TaskService {
 	}
 
 	public List<Task> getTask(String taskName) {
-		return taskRepository.findByNameIgnoreCase(taskName);
+		return taskRepository.findByNameIsContainingIgnoreCase(taskName);
 	}
 
 	public List<Task> getTaskByPriority(int priority) {
@@ -77,15 +75,5 @@ public class TaskService {
 	public List<Task> getTaskByEndDate(Date endDate) {
 		return taskRepository.findByEndDate(endDate);
 	}
-	
-	public List<Task> getTaskByPartialName(String taskName){
-		return taskRepository.findByNameIsContainingIgnoreCase(taskName);
-	}
-
-	public List<Task> getTaskByPartialParent(String taskParent) {
-		// TODO Auto-generated method stub
-		return taskRepository.findByParentIsContainingIgnoreCase(taskParent);
-	}
-
 
 }

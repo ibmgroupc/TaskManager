@@ -93,8 +93,8 @@ public class Task {
 		
 	}
 	public void setStartDate(Date startDate) {
-		if (startDate.compareTo(new Date()) < 0) {
-			throw new StatusIllegalArgumentException("Start Date should be future day");
+		if (!(startDate.after(new Date())))  {
+			throw new StatusIllegalArgumentException("Start Date should not be past date");
 		}
 		this.startDate = startDate;
 	}

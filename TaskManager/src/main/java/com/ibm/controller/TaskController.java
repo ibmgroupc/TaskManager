@@ -2,6 +2,7 @@ package com.ibm.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,6 +71,16 @@ public class TaskController {
 	List<Task> getTask(@PathVariable("name") String taskName) {
 		return taskService.getTask(taskName);
 	}
+	/*
+	 * method to fetch task by name
+	 * @param taskId
+	 * */
+	@CrossOrigin
+	@GetMapping("/task/id/{id}")
+	Optional<Task> getTaskById(@PathVariable("id") String taskId) {
+		return taskService.getTaskById(taskId);
+	}
+
 	/*
 	 * method to fetch task by priority
 	 * @param priority

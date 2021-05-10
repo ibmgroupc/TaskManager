@@ -50,5 +50,14 @@ public class CreateUserService {
 	public List<CreateUser> getUser() {
 		return createUserRepository.findAll();
 	}
+	
+	public void setCreateUserRepository(CreateUserRepository createUserRepository) {
+		this.createUserRepository = createUserRepository;
+
+	}
+
+	public CreateUserRepository getCreateUserRepository() {
+		return createUserRepository;
+	}
 
 }

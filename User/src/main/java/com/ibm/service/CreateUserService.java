@@ -18,7 +18,6 @@ public class CreateUserService {
 	CreateUserRepository createUserRepository;
 
 	public String createUser(@Valid CreateUser createUser) {
-		
 		String username=createUser.getUsername();
 		List<CreateUser> oldCreateUser=createUserRepository.findAll();
 		List<CreateUser> newCreateUser=createUserRepository.findByUsernameIgnoreCase(username);

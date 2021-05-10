@@ -37,7 +37,7 @@ public class DummyTaskRepository implements TaskRepository {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public Task save(Task task) {
 		task.setId("24398t84gb32oi");
@@ -115,12 +115,6 @@ public class DummyTaskRepository implements TaskRepository {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-//	@Override
-//	public <S extends Task> S save(S arg0) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 	@Override
 	public <S extends Task> long count(Example<S> arg0) {

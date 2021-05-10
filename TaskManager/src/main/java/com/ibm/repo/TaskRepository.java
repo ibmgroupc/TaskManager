@@ -1,18 +1,16 @@
 package com.ibm.repo;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.ibm.entity.Task;
 
-public interface TaskRepository extends MongoRepository<Task , String> {
+public interface TaskRepository extends MongoRepository<Task, String> {
 
 	List<Task> findByNameIgnoreCase(String taskName);
-	
+
 	List<Task> findByNameIsContainingIgnoreCase(String taskName);
 
 	List<Task> findByPriority(int priority);

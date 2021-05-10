@@ -19,7 +19,7 @@ public class TaskService {
 	TaskRepository taskRepository;
 
 	public String createTask(Task task) {
-		Task savedTask=taskRepository.save(task);
+		Task savedTask = taskRepository.save(task);
 		return savedTask.getId();
 
 	}
@@ -29,22 +29,22 @@ public class TaskService {
 	}
 
 	public void updateTask(@Valid Task task) {
-		STATUS status =task.getStatus();
+		STATUS status = task.getStatus();
 		Optional<Task> oldTask = taskRepository.findById(task.getId());
-		oldTask.ifPresent(oldtask ->{
+		oldTask.ifPresent(oldtask -> {
 			STATUS oldstatus = oldtask.getStatus();
-			if(oldstatus == STATUS.TODO) {
-				if(!(status==STATUS.DONE|| status == STATUS.DOING || status == STATUS.TODO)) {
+			if (oldstatus == STATUS.TODO) {
+				if (!(status == STATUS.DONE || status == STATUS.DOING || status == STATUS.TODO)) {
 					throw new IllegalArgumentException("STATUS CAN ONLY BE TODO");
 				}
 			}
-			if(oldstatus == STATUS.DOING) {
-				if(!(status == STATUS.DONE || status==STATUS.DOING)){
+			if (oldstatus == STATUS.DOING) {
+				if (!(status == STATUS.DONE || status == STATUS.DOING)) {
 					throw new IllegalArgumentException("STATUS CAN ONLY BE DOING");
 				}
 			}
-			if(oldstatus == STATUS.DONE) {
-				if(!(status == STATUS.DONE)) {
+			if (oldstatus == STATUS.DONE) {
+				if (!(status == STATUS.DONE)) {
 					throw new IllegalArgumentException("TASK IS COMPLETED CAN ONLY BE DELETED");
 				}
 			}
@@ -77,7 +77,7 @@ public class TaskService {
 	}
 
 	public void setTaskRepository(TaskRepository taskRepository) {
-		this.taskRepository= taskRepository;
+		this.taskRepository = taskRepository;
 	}
 
 	public Optional<Task> getTaskById(String taskId) {

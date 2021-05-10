@@ -20,6 +20,26 @@ class TaskServiceTest {
 		String taskId=taskService.createTask(task);
 		assertNotNull(taskId);
 	}
+	
+	@Test
+	void testCreateTaskName() {
+		TaskService taskService=new TaskService();
+		TaskRepository dummyRepo=new DummyTaskRepository();
+		taskService.setTaskRepository(dummyRepo);
+		Task task=new Task();
+		String taskName=taskService.createTask(task);
+		assertNotNull(taskName);
+	}
+	
+	@Test
+	void testCreateTaskParent() {
+		TaskService taskService=new TaskService();
+		TaskRepository dummyRepo=new DummyTaskRepository();
+		taskService.setTaskRepository(dummyRepo);
+		Task task=new Task();
+		String taskParent=taskService.createTask(task);
+		assertNotNull(taskParent);
+	}
    
 	@Test
 	void testGetTasks() {

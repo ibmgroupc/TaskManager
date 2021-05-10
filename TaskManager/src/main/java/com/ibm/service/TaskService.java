@@ -84,4 +84,8 @@ public class TaskService {
 		return taskRepository.findById(taskId);
 	}
 
+	public TaskRepository getTaskRepository() {
+		return taskRepository;
+	}
+
 }

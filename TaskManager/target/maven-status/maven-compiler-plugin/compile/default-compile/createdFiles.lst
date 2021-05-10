@@ -1,0 +1,9 @@
+com\ibm\repo\TaskRepository.class
+com\ibm\TaskmanagerApplication.class
+com\ibm\service\TaskService.class
+com\ibm\entity\OCCURANCE.class
+com\ibm\entity\TYPE.class
+com\ibm\controller\TaskController.class
+com\ibm\service\StatusIllegalArgumentException.class
+com\ibm\entity\Task.class
+com\ibm\entity\STATUS.class
